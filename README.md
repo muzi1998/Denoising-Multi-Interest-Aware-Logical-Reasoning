@@ -37,12 +37,16 @@ Four datasets contain user ID, item ID, and ratings. The MoTV, Books, and Electr
 ## Train
 * ML-1M (#Seq = 10)
 ```bash
+> cd ./src/data_processor/ProLogicRecDP.py
+> his_length = his_length[his_length > 9]  # line 30 in ProLogicRecDP.py
 > cd ./src/
 > # ML_num = [3,5,7,9,11], max_his = [10,50,100]
 > python MI_no_rule_main_length.py --rank 1 --model_name NCR --load = 0 --train = 1 --optimizer GD --lr 0.001 --dataset ML-1M --ML_num 5 --ML_model 'SA_beta_fuse'  --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 10 --test_neg_n 100
 ```
 * ML-1M (#Seq = 100)
 ```bash
+> cd ./src/data_processor/ProLogicRecDP.py
+> his_length = his_length[his_length > 99]  # line 30 in ProLogicRecDP.py
 > cd ./src/
 > # ML_num = [3,5,7,9,11], max_his = [10,50,100]
 > python MI_no_rule_main_length.py --rank 1 --model_name NCR --load = 0 --train = 1 --optimizer GD --lr 0.001 --dataset ML-1M --ML_num 3 --ML_model 'SA_beta_fuse'  --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 100 --test_neg_n 100
@@ -51,12 +55,16 @@ Four datasets contain user ID, item ID, and ratings. The MoTV, Books, and Electr
 ## Test
 * ML-1M (#Seq = 10)
 ```bash
+> cd ./src/data_processor/ProLogicRecDP.py
+> his_length = his_length[his_length > 9]  # line 30 in ProLogicRecDP.py
 > cd ./src/
 > # ML_num = [3,5,7,9,11], max_his = [10,50,100]
 > python MI_no_rule_main_length.py --rank 1 --model_name NCR --load = 1 --train = 0 --optimizer GD --lr 0.001 --dataset ML-1M --ML_num 5 --ML_model 'SA_beta_fuse'  --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 10 --test_neg_n 100
 ```
 * ML-1M (#Seq = 100)
 ```bash
+> cd ./src/data_processor/ProLogicRecDP.py
+> his_length = his_length[his_length > 99]  # line 30 in ProLogicRecDP.py
 > cd ./src/
 > # ML_num = [3,5,7,9,11], max_his = [10,50,100]
 > python MI_no_rule_main_length.py --rank 1 --model_name NCR --load = 1 --train = 0 --optimizer GD --lr 0.001 --dataset ML-1M --ML_num 3 --ML_model 'SA_beta_fuse'  --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 100 --test_neg_n 100
