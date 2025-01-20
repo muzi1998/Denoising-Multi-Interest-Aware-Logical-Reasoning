@@ -38,13 +38,32 @@ Four datasets contain user ID, item ID, and ratings. The MoTV, Books, and Electr
 ## Train
 * ML-1M (#Seq = 10)
 ```bash
-> cd main/src/
+> cd ./src/
 > # ML_num = [3,5,7,9,11], max_his = [10,50,100]
 > python MI_no_rule_main_length.py --rank 1 --model_name NCR --optimizer GD --lr 0.001 --dataset ML-1M --ML_num 5 --ML_model 'SA_beta_fuse'  --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 10 --test_neg_n 100
 ```
 * ML-1M (#Seq = 100)
 ```bash
-> cd main/src/
+> cd ./src/
 > # ML_num = [3,5,7,9,11], max_his = [10,50,100]
 > python MI_no_rule_main_length.py --rank 1 --model_name NCR --optimizer GD --lr 0.001 --dataset ML-1M --ML_num 3 --ML_model 'SA_beta_fuse'  --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 100 --test_neg_n 100
 ```
+
+## Results
+
+|Method|||||ML1M-10||ML1M-100||
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Method|Propositional Logic|Self-attention Mechanism|ILR Loss|IPD Loss|NDCG@10|Time|NDCG@10|Time|
+|NCR (Baseline)|ItLR|X|X|X|0.353|44.98s|0.207|124.46s|
+|||||||||
+|Our Variant 1|IALR|O|X|O|0.385|54.54s|0.246|57.67s|
+|Our Variant 2|IALR|O|O|X|0.664|51.44s|0.523|60.34s|
+|Ours|IALR|O|O|O|0.739|68.98s|0.532|86.64s|
+
+We evaluated the efficiency and complexity of our method on two datasets with varying sequence lengths, using NCR as a baseline. The experimental results are shown in the following table, where "O" means "used," while "X" means "not used." ItLR stands for Item-based Logical Reasoning, while IALR stands for Interest Aware Logical Reasoning. ML1M-10 and ML1M-100 represent datasets ML-1M with sequence lengths of 10 and 100, respectively. We have the following observations:
+- As sequence length increases (ML1M-10 to ML1M-100), NCR efficiency drops sharply (44s to 124s), while our MILR based on interest-aware logical reasoning remains stable (69s to 87s), highlighting its advantage in long-sequence scenarios.
+- In the short sequence (ML1M-10), our Variant 1 reduced efficiency by 21% but improved accuracy by 9% compared to NCR. Our methods rely on fewer interests for long sequences, while NCR uses the entire item sequence, making our methods more efficient; for example, our Variant 2 only uses 52% of NCR time to improve NCR accuracy by 153% in the ML1M-100.
+- Our method and two variants are significantly superior to NCR regarding efficiency and recommendation accuracy for long sequences.
+
+See the full results in our paper.
+
