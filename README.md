@@ -10,7 +10,6 @@
 
 ### 1. Environment
 
-+ Python 3.7.3
 + PyTorch 1.12.1+cu113
 + scikit-learn 0.23.1
 + scipy 1.10.1
