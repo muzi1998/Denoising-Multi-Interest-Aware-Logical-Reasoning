@@ -5,3 +5,46 @@
 <center>
 <img src="./EMILE.png" alt="EMILE" width="950"/>
 </center>
+
+## Running the Experiments
+
+### 1. Environment
+
++ Python 3.7.3
++ PyTorch 1.12.1+cu113
++ scikit-learn 0.23.1
++ scipy 1.10.1
++ RTX 3090
++ Memory 128G
+
+You can also install dependencies by
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Dataset
+
+| Dataset  | ML-1M   | MoTV    | Electronics | Books     |
+|----------|---------|---------|-------------|-----------|
+| #User    | 1,594   | 1,234   | 142,938     | 64,919    |
+| #Item    | 2,054   | 20,773  | 47,402      | 25,694    |
+| #Inter   | 248,220 | 264,282 | 2,508,516   | 3,420,055 |
+| #MedLen  | 91.0    | 148.5   | 14.0        | 36.0      |
+| Sparsity | 92.42%  | 98.97%  | 99.96%      | 99.79%    |
+
+Four datasets contain user ID, item ID, and ratings. The MoTV, Books, and Electronics datasets can be obtained from [Amazon Review Data (2018)](https://nijianmo.github.io/amazon/index.html). We use the ``5-core'' version of these three datasets, in which all users and items have at least five interactions. First, we calculate the median sequence length of the interaction sequences for each dataset \footnote[2]{We calculate the dataset's sequence length using the median instead of the mean to avoid being affected by the maximum or minimum values of the sequence lengths.} and classify them based on the median sequence length. Specifically, the [ML-1M Dataset](https://grouplens.org/datasets/movielens/) and MoTV datasets (with \#MedLen $\geq$ 50)  are categorized as long-sequence data, while the Books and Electronics datasets (with \#MedLen $<$ 50) are categorized as short-sequence data. The sequence length in these four datasets indicates the number of items users interacted with over a recent period. 
+
+## Train
+* ML-1M (#Seq = 10)
+```bash
+> cd main/src/
+> # ML_num = [3,5,7,9,11], max_his = [10,50,100]
+> python MI_no_rule_main_length.py --rank 1 --model_name NCR --optimizer GD --lr 0.001 --dataset ML-1M --ML_num 5 --ML_model 'SA_beta_fuse'  --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 10 --test_neg_n 100
+```
+* ML-1M (#Seq = 100)
+```bash
+> cd main/src/
+> # ML_num = [3,5,7,9,11], max_his = [10,50,100]
+> python MI_no_rule_main_length.py --rank 1 --model_name NCR --optimizer GD --lr 0.001 --dataset ML-1M --ML_num 3 --ML_model 'SA_beta_fuse'  --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 100 --test_neg_n 100
+```
