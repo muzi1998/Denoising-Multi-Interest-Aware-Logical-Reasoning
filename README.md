@@ -72,7 +72,7 @@ Four datasets contain user ID, item ID, and ratings. The MoTV, Books, and Electr
 
 ## Results
 
-|Method|||||ML1M-10||ML1M-100||
+|Method|||||ML-1M(10)||ML-1M(100)||
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |Method|Propositional Logic|Self-attention Mechanism|ILR Loss|IPD Loss|NDCG@10|Time|NDCG@10|Time|
 |NCR (Baseline)|ItLR|X|X|X|0.353|44.98s|0.207|124.46s|
@@ -81,9 +81,9 @@ Four datasets contain user ID, item ID, and ratings. The MoTV, Books, and Electr
 |Our Variant 2|IALR|O|O|X|0.664|51.44s|0.523|60.34s|
 |Ours|IALR|O|O|O|0.739|68.98s|0.532|86.64s|
 
-We evaluated the efficiency and complexity of our method on two datasets with varying sequence lengths, using NCR as a baseline. The experimental results are shown in the following table, where "O" means "used," while "X" means "not used." ItLR stands for Item-based Logical Reasoning, while IALR stands for Interest Aware Logical Reasoning. ML1M-10 and ML1M-100 represent datasets ML-1M with sequence lengths of 10 and 100, respectively. We have the following observations:
-- As sequence length increases (ML1M-10 to ML1M-100), NCR efficiency drops sharply (44s to 124s), while our MILR based on interest-aware logical reasoning remains stable (69s to 87s), highlighting its advantage in long-sequence scenarios.
-- In the short sequence (ML1M-10), our Variant 1 reduced efficiency by 21% but improved accuracy by 9% compared to NCR. Our methods rely on fewer interests for long sequences, while NCR uses the entire item sequence, making our methods more efficient; for example, our Variant 2 only uses 52% of NCR time to improve NCR accuracy by 153% in the ML1M-100.
+We evaluated the efficiency and complexity of our method on two datasets with varying sequence lengths, using NCR as a baseline. The experimental results are shown in the following table, where "O" means "used," while "X" means "not used." ItLR stands for Item-based Logical Reasoning, while IALR stands for Interest Aware Logical Reasoning. ML-1M(10) and ML-1M(100) represent datasets ML-1M with sequence lengths of 10 and 100, respectively. We have the following observations:
+- As sequence length increases (ML-1M(10) to ML-1M(100)), NCR efficiency drops sharply (44s to 124s), while our method based on interest-aware logical reasoning remains stable (69s to 87s), highlighting its advantage in long-sequence scenarios.
+- In the short sequence (ML-1M(10)), our Variant 1 reduced efficiency by 21% but improved accuracy by 9% compared to NCR. Our methods rely on fewer interests for long sequences, while NCR uses the entire item sequence, making our methods more efficient; for example, our Variant 2 only uses 52% of NCR time to improve NCR accuracy by 153% in the ML1M-100.
 - Our method and two variants are significantly superior to NCR regarding efficiency and recommendation accuracy for long sequences.
 
 See the full results in our paper.
