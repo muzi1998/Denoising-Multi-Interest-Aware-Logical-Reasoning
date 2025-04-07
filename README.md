@@ -94,7 +94,7 @@ See the full results in our paper.
 @inproceedings{EMILE,
   title={Denoising Multi-Interest-Aware Logical Reasoning for Long-Sequence Recommendation},
   author={Li, Fei and Gao, Qingyun and Dang, Yizhou and Yang, Enneng and Guo, Guibing and Zhao, Jianzhe and Wang, Xingwei},
-  booktitle={Proceedings of the 48th International ACM SIGIR Conference on Research and Development in Information Retrieval}{ July 13--18, 2025}{Padua, Italy.},
+  booktitle={Proceedings of the 48th International ACM SIGIR Conference on Research and Development in Information Retrieval},
   year={2025}
 }
 ```
